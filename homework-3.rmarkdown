@@ -1,0 +1,20 @@
+---
+title: "Homework 3"
+author: Liv Zou
+header: ENV S 193 DS
+date: 2026-05-26
+format: pdf
+---
+# Setup
+
+```{r}
+library(tidyverse)
+```
+
+# Problem 1
+
+# Problem 2
+
+# Problem 3
+
+# Problem 4

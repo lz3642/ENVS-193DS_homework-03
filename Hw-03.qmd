@@ -1,0 +1,85 @@
+---
+title: "Homework 3"
+author: Liv Zou
+header: ENV S 193 DS
+date: 2026-05-26
+format: pdf
+---
+# Setup
+
+```{r}
+#| label: packing
+library(tidyverse)
+library(here)
+library(janitor)
+library(readxl)
+```
+
+```{r}
+#| label: kelp package
+kelp <- read_csv(here("data", "temp-kelp (1).csv"))
+head(kelp)
+```
+
+# Problem 1
+
+1a. 
+
+The appropriate tests to determine the strength of the relationship between temperature and giant kelp frond elongation rate are the correlation analysis and linear regression tests. 
+
+Correlation analysis test would be useful because it would show the strength and direction of the linear relationship between the two variables using the r coefficient and doesn't designate either variable as cause-or-effect. 
+
+Linear regression uses mathematical representation of the relationship and analyzes it through a cause-and-effect modeling of specific temperature and its corresponding elongation rate of kelp. 
+
+The tests are different because correlation analysis merely analyzes the strength/direction of the relationship without merely designating a causation in the relationship's variables, while linear regression treats the variables as a cause-and-effect. 
+
+1b. 
+
+```{r}
+#| label: visualizing
+
+ggplot(kelp, aes(x = temp_c, y = kelp_elong)) +
+  geom_point(color = "salmon", size = 2) + 
+  labs(x = "Temperature (C°)", 
+       y = "Giant Kelp Frond Elongation Rate(cm day-1)", 
+       title = "Relationship between temperature and growth rate of giant kelp fronds") + 
+theme_replace()
+```
+
+1c. 
+
+Assumption Checks:
+```{r}
+#| label: checking
+kelp_checking <- lm(kelp_elong ~ temp_c, data = kelp)
+par(mfrow = c(2, 2))
+plot(kelp_checking)
+```
+
+Test Running:
+
+Linear Regression Test:
+```{r}
+#| label: linear
+summary(kelp_checking)
+```
+
+The assumptions I checked for were linearity, normal distribution, homeoscadacity, and influential points. I checked using diagnostic plots from the linear regression graphs. From the diagnostic plots, the assumptions seem generally satisfied, as the residuals are not following any sort of extreme pattern, the qqline shows a relative normal distribution, and the Cook's distance values were low in the RVL plots. 
+
+Correlation Test:
+```{r}
+#| label: corr
+cor.test(kelp$temp_c, kelp$kelp_elong)
+```
+
+A Pearson's correlation test showed a strong negative relationship between temperature and growth rate of kelp fronds (r = -0.6877, p-value = 1.366e-05), suggesting that as ocean temperature increases, elongation rate decreases. 
+
+1d. 
+
+
+
+# Problem 2
+
+# Problem 3
+
+# Problem 4
