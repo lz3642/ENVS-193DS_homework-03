@@ -11,3 +11,4 @@ code - Code for homework 3
 ## Code information
 Code contains data for my homework.
 ## Rendered Output
+[View Homework 3 PDF](Hw-03.pdf)
