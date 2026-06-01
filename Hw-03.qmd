@@ -3,7 +3,13 @@ title: "Homework 3"
 author: Liv Zou
 header: ENV S 193 DS
 date: 2026-05-26
-format: pdf
+format:
+  pdf:
+    toc: true # use this to display a table of contents
+execute:
+  message: false # use this to make sure messages don't show up
+  warning: false # use this to make sure warnings don't show upl
+  number-sections: true
 ---
 # Setup
 
@@ -15,7 +21,6 @@ library(here)
 library(janitor)
 library(readxl)
 ```
-
 
 ```{r}
 #| message: false
@@ -42,33 +47,40 @@ Linear regression uses mathematical representation of the relationship and analy
 The tests are different because correlation analysis merely analyzes the strength/direction of the relationship without merely designating a causation in the relationship's variables, while linear regression treats the variables as a cause-and-effect. 
 
 1b. 
-
 ```{r}
 #| label: visualizing
 
+# Set up scatterplot with ggplot
 ggplot(kelp, aes(x = temp_c, y = kelp_elong)) +
+   # Set individual observations 
   geom_point(color = "salmon", size = 2) + 
-  labs(x = "Temperature (C°)", 
+  labs(
+    # Set up x y axes for scatterplot
+    x = "Temperature (C°)", 
        y = "Giant Kelp Frond Elongation Rate(cm day-1)", 
-       title = "Relationship between temperature and growth rate of giant kelp fronds") + 
+       title = "Relationship between temperature and growth rate") + 
 theme_replace()
 ```
 
 1c. 
-
 Assumption Checks:
 ```{r}
 #| label: checking
+
+# linear regression model
 kelp_checking <- lm(kelp_elong ~ temp_c, data = kelp)
+# Set up diagnostic plots to appear all in one image
 par(mfrow = c(2, 2))
+# Show diagnostic plots
 plot(kelp_checking)
 ```
 
-Test Running:
 
 Linear Regression Test:
 ```{r}
 #| label: linear
+
+# Displaying summary of linear regression model
 summary(kelp_checking)
 ```
 
@@ -77,19 +89,19 @@ The assumptions I checked for were linearity, normal distribution, homeoscadacit
 Correlation Test:
 ```{r}
 #| label: corr
+
+# Pearson correlation test for parametric values
 cor.test(kelp$temp_c, kelp$kelp_elong)
 ```
 
 A Pearson's correlation test showed a strong negative relationship between temperature and growth rate of kelp fronds (r = -0.6877, p-value = 1.366e-05), suggesting that as ocean temperature increases, elongation rate decreases. 
 
 1d. 
-
 To evaluate the relationship between temperature and kelp growth rate, I used the summary function to construct linear regression model and the Pearson correlation for my correlation test. Pearson correlation measures the direction and strength of the relationship between temperature and elongation, while linear regression analyzed the predictability of temperature on growth rate.
 
 From my test results, it appears that there is a negative association between temperature and kelp elongation rate, suggesting that kelp grows slower under hotter ocean temperatures (Pearson correlation: r = -0.6877, p-value = 1.366e-05, linear regression: beta = -0.432, r-squared = 0.473, p = 1.366e-05)
 
 1e. 
-
 Our results suggest rising ocean temperatures negatively impact giant kelp frond growth rates, which could negatively influence surrounding ecosystems and affect biodiversity. It raises a biological and ecological concern for surrounding members in aquatic ecosystems that coexist around these kelp populations as kelp is an abundant autotroph, habitat, and food source for many marine organisms. 
 
 Reduced growth would massively influence other members in the associated food chains/ecosystems and could deteriorate ecosystem functioning. These statistical findings call for an action to further monitor on kelp communities, as continuing increases in ocean temperatures may pose significant danger and risk to ecosystems, climate, nature, and our environment. 
@@ -97,59 +109,66 @@ Reduced growth would massively influence other members in the associated food ch
 These concerns raised from these statistical findings should not be taken lightly and should be used towards greater ecological preservation efforts and continued environmental management. 
 
 1f. 
-
 ```{r}
 #| label: repeating
 
+# Run correlation test to assess linearity
 cor.test(kelp$temp_c, kelp$kelp_elong)
-
+# Run summary of coefficients, f statistics, coeff of determination
 summary(kelp_checking)
 ```
 
 # Problem 2
 
 2a. 
-
 ```{r}
-personal_data <- read_csv("homework 3 personal data project - Sheet1.csv")
 # defining csv file into R 
+personal_data <- read_csv("homework 3 personal data project - Sheet1.csv")
+# Converting into date format in Rstudio
 personal_data$Date
 ```
 
 Hydration + Sleep: 
-
 ```{r}
+# Set up scatterplot
 ggplot(personal_data,
        aes(y = hydration,
            x = Sleep_hrs,
            color = Date)) +
   geom_point(size = 4) +
+# Add linear regression line 
   geom_smooth(method = "lm",
               se = FALSE,
               color = "red",
               linewidth = 2) +
   labs(
+    # Labelling x y axes 
     y = "Hydration (fl oz)",
     x = "Sleep",
     color = "Date",
     title = "The Relationship Between Hydration and Sleep",
     subtitle = "Most recent observations from 5/26 - 5/31"
   ) +
+  # Format y-axis labels
   scale_y_continuous(labels = scales::comma) +
   theme_minimal()
 ```
 
 Workday vs. Sleep
 ```{r}
+# Defining points and dataset in ggplot
 ggplot(personal_data, aes(x = workday, y = Sleep_hrs, fill = workday, color = workday)) +
+  # Making a boxplot to show distribution of sleep on workdays + nonworkdays
   geom_boxplot(show.legend = FALSE, alpha = 0.5) +
   geom_jitter(width = 0.1, alpha = 0.8, size = 2) + 
+  # Manually assigning specific points to specific individual dates
   geom_text(
     aes(label = Date),
     position = position_jitter(width = 0.1),
     vjust = -0.8,
     size = 3
   ) +
+  # Set up x y axes
   labs(
     x = "Workday",
     y = "Sleep Duration (hours)", 
@@ -158,7 +177,6 @@ ggplot(personal_data, aes(x = workday, y = Sleep_hrs, fill = workday, color = wo
 ```
 
 2b.
-
 Lineplot:
 Figure 1. Nightly sleep (in hrs and minutes) and daily hydration levels (in fluid ounces) from 5/26/2026-5/31/2026. Each point and color represents a different, individual day of observation. The red line in the graph shows the general trend of the relationship between sleep and hydration. The negative trend observed in this graph suggests that increased sleep is generally associated with lower levels of hydration. However, many of the points are scattered, and the data does not seem to be linear. 
 
@@ -169,34 +187,32 @@ Figure 1. Nightly sleep duration (in hours) on workdays and non-workdays from 5/
 # Problem 3
 
 3a. 
-
 I think an affective visualization that could be useful for my project would be in the form of a tree, where the more sleep there is, the taller the tree is. The color of the leaves in the tree could represent hydration intake, with light to dark green showing smaller to larger hydration levels. The amount of leaves could represent how many steps there are. Meals eaten could be the number of fruit present. Workout days could be represented by the presence of a sun. Workdays could be represented with the presence of animals.
 
 3b. 
 ```{r, echo=FALSE, out.width="80%",fig.align="center"}
 #| echo: false
 #| message: false
+# Using knitr function to embed image into quarto
 knitr::include_graphics("Sketch.jpg")
 ```
 3c. 
 ```{r, echo=FALSE, out.width="80%",fig.align="center"}
 #| echo: false
 #| message: false
+# use knitr function to embed image into quarto
 knitr::include_graphics("Datavis.jpg")
 ```
 
 3d. 
-
 My data visualization was drawn by hand on paper and it is showing health characteristics such as sleep, hydration, meal intake, in the allegory of a forest of trees. I was particularly interested of the illustration of the glacial oil rigs shown during class, as well as looking through Jill Pelto's work. I used mildliner zebra highlighters to color my work and the sarasa 0.5 ink pen (the same one I use to journal) to write and outline, and I sketched everything first in pencil. 
 
 3e. 
-
 Link to slides: https://docs.google.com/presentation/d/1_hC-_YOgUdngVi8XIew6GvAZk7fb11zLQptmSBFhvrU/edit?usp=sharing
 
 # Problem 4
 
 4a. 
-
 Paper for reference: https://doi.org/10.1186/s41606-025-00169-0
 
 In this paper, the authors wanted to see how hydration habits before sleeping affected the quality of sleep in adults. They used a one-way ANOVA test to compare sleep quality across three groups distributed by hydration levels: high, moderate, low. For post-hoc, they used the Tukey's HSD with Bonferroni correction to assess differences. The response variable(s) is sleep quality, efficiency and no. of nocturnal awakenings, and the predictor variable is hydration levels ranked from high to low.
@@ -205,12 +221,22 @@ In this paper, the authors wanted to see how hydration habits before sleeping af
 #| label: figure 2
 #| echo: false
 #| message: false
-knitr::include_graphics("Anovafigure2.jpeg")
+
 # Using Knitr function to embed photo directly into Quarto
+knitr::include_graphics("Anovafigure2.jpeg")
 ```
 
-
 4b. 
+The authors were very clear with their statistics in this figure, because they categorized their data about the relationship between sleep quality and hydration levels (in orange) through an ordinal bar graph. Here, I can clearly see that the lower hydration group produces a generally high mean sleep efficiency, while the higher hydration group produces a generally lower sleep efficiency. They do not include the error bars, CI, or participant data, which makes it difficult to see the actual spread of data at its capacity, and the variability within each group. What is interesting is that in the paper, they say that there are error bars and standard deviations and it is actually the Y-axis, which is difficult to interpret, and they assess sleep efficiency as a percentage in combination of the orange bars. 
+
+4c. 
+I think they have a pretty high data::ink ratio because the graph is really simple and minimalistic, and there's more ink dedicated to the actual display/representation of their statistical summaries and results than for anything else. They handled the visual clutter really well, because the design is minimal and there is only three categories, focusing primarily on the mean sleep efficiency percentage across groups. 
+
+4d. 
+I think the authors should add error bars and individual data points from a small sample of each category would be helpful because it would help readers see how spread out the actual data is rather than just through a summarization. I also think the lines in the background could be removed, and a caption addressing the figure in more depth could be helpful for readers to interpret more easily.
+
+
+
 
 
 
