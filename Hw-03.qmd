@@ -116,12 +116,12 @@ personal_data <- read_csv("homework 3 personal data project - Sheet1.csv")
 personal_data$Date
 ```
 
-Hydration + Daily Steps: 
+Hydration + Sleep: 
 
 ```{r}
 ggplot(personal_data,
        aes(y = hydration,
-           x = steps,
+           x = Sleep_hrs,
            color = Date)) +
   geom_point(size = 4) +
   geom_smooth(method = "lm",
@@ -130,9 +130,9 @@ ggplot(personal_data,
               linewidth = 2) +
   labs(
     y = "Hydration (fl oz)",
-    x = "Steps (per day)",
+    x = "Sleep",
     color = "Date",
-    title = "The Relationship Between Hydration and Steps Daily",
+    title = "The Relationship Between Hydration and Sleep",
     subtitle = "Most recent observations from 5/26 - 5/31"
   ) +
   scale_y_continuous(labels = scales::comma) +
@@ -160,7 +160,7 @@ ggplot(personal_data, aes(x = workday, y = Sleep_hrs, fill = workday, color = wo
 2b.
 
 Lineplot:
-Figure 1. Daily step count and daily hydration levels (in fluid ounces) from 5/26/2026-5/31/2026. Each point and color represents a different, individual day of observation. The red line in the graph shows the general trend of the relationship between hydration and daily stepcount. The positive trend observed in this graph suggests that greater step counts are generally associated with higher levels of hydration. 
+Figure 1. Nightly sleep (in hrs and minutes) and daily hydration levels (in fluid ounces) from 5/26/2026-5/31/2026. Each point and color represents a different, individual day of observation. The red line in the graph shows the general trend of the relationship between sleep and hydration. The negative trend observed in this graph suggests that increased sleep is generally associated with lower levels of hydration. However, many of the points are scattered, and the data does not seem to be linear. 
 
 Boxplot:
 Figure 1. Nightly sleep duration (in hours) on workdays and non-workdays from 5/26/2026-5/31/2026. Each point represents an individual observation, with yes points indicated with blue and no points indicated in red. The boxplots summarize the overall distribution of sleep duration depending on whether there was a workday or not. Sleep duration tended to be generally higher if the day was not a work day. 
@@ -185,4 +185,32 @@ knitr::include_graphics("Sketch.jpg")
 knitr::include_graphics("Datavis.jpg")
 ```
 
+3d. 
+
+My data visualization was drawn by hand on paper and it is showing health characteristics such as sleep, hydration, meal intake, in the allegory of a forest of trees. I was particularly interested of the illustration of the glacial oil rigs shown during class, as well as looking through Jill Pelto's work. I used mildliner zebra highlighters to color my work and the sarasa 0.5 ink pen (the same one I use to journal) to write and outline, and I sketched everything first in pencil. 
+
+3e. 
+
+Link to slides: https://docs.google.com/presentation/d/1_hC-_YOgUdngVi8XIew6GvAZk7fb11zLQptmSBFhvrU/edit?usp=sharing
+
 # Problem 4
+
+4a. 
+
+Paper for reference: https://doi.org/10.1186/s41606-025-00169-0
+
+In this paper, the authors wanted to see how hydration habits before sleeping affected the quality of sleep in adults. They used a one-way ANOVA test to compare sleep quality across three groups distributed by hydration levels: high, moderate, low. For post-hoc, they used the Tukey's HSD with Bonferroni correction to assess differences. The response variable(s) is sleep quality, efficiency and no. of nocturnal awakenings, and the predictor variable is hydration levels ranked from high to low.
+
+```{r fig.align='center', out.width='80%', size='5'}
+#| label: figure 2
+#| echo: false
+#| message: false
+knitr::include_graphics("Anovafigure2.jpeg")
+# Using Knitr function to embed photo directly into Quarto
+```
+
+
+4b. 
+
+
+
