@@ -124,6 +124,7 @@ The Spearmann rank correlation test found a significant negative relationship (Ï
 2a. 
 
 ```{r}
+#| message: false
 # defining csv file into R 
 personal_data <- read_csv("homework 3 personal data project - Sheet1.csv")
 # Converting into date format in Rstudio
