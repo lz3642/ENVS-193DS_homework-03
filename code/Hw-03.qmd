@@ -131,6 +131,23 @@ personal_data <- read_csv("homework 3 personal data project - Sheet1.csv")
 personal_data$Date
 ```
 
+Most recent data: 
+```{r}
+most_recent_date <- max(personal_data$Date, na.rm = TRUE)
+
+ggplot(personal_data,
+       aes(x = Sleep_hrs,
+           y = hydration)) +
+  geom_point(color = "darkorchid", size = 4) +
+  labs(
+    x = "Sleep (hours)",
+    y = "Hydration (fl oz)",
+    title = "The Relationship Between Hydration and Sleep",
+    subtitle = paste("Most recent observation:", most_recent_date)
+  ) +
+  scale_y_continuous(labels = scales::comma) +
+  theme_minimal()
+```
 
 Hydration + Sleep: 
 ```{r}
