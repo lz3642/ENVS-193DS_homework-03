@@ -31,7 +31,7 @@ library(scales)
 Loading kelp package:
 ```{r}
 #| label: kelp package
-kelp <- read_csv(here("data", "temp-kelp (1).csv"))
+kelp <- read_csv(here::here("..", "data", "temp-kelp (1).csv"))
 # Display first 6 rows
 head(kelp)
 ```
@@ -40,13 +40,11 @@ head(kelp)
 
 1a. 
 
-The appropriate tests to determine the strength of the relationship between temperature and giant kelp frond elongation rate are the correlation analysis and linear regression tests. 
+The appropriate tests to determine the strength of the relationship between temperature and giant kelp frond elongation rate are the Pearson correlation test and the Spearmann rank correlation test. 
 
-Correlation analysis test would be useful because it would show the strength and direction of the linear relationship between the two variables using the r coefficient and doesn't designate either variable as cause-or-effect. 
+The Pearson correlation test is for parametric data and assumes a linear relationship between continuous variables, approximate normal distribution, and absence of outliers. The Spearman rank correlation test is a non-parametric test that does not require the data to be normally distributed, and is appropriate when the data is not linear or when assumptions from the Pearson test have been violated. 
 
-Linear regression uses mathematical representation of the relationship and analyzes it through a cause-and-effect modeling of specific temperature and its corresponding elongation rate of kelp. 
-
-The tests are different because correlation analysis merely analyzes the strength/direction of the relationship without merely designating a causation in the relationship's variables, while linear regression treats the variables as a cause-and-effect. 
+Both tests are similar because they both measure strength and direction of a relationship between two variables and don't assume causation in either test. However, both tests are also different. The Spearmann test uses a ranking of the data than raw values, and isn't affected by outliers or requiring the data to have normality. It is best used in monotonic relationships, where the direction does not change. The Pearson test uses raw data values from the dataset and measures the strength of linear relationships in continuous variables. It assumes normality and absence of outliers. 
 
 1b. 
 ```{r}
@@ -55,13 +53,13 @@ The tests are different because correlation analysis merely analyzes the strengt
 # Set up scatterplot with ggplot
 ggplot(kelp, aes(x = temp_c, y = kelp_elong)) +
    # Set individual observations 
-  geom_point(color = "salmon", size = 2) + 
+  geom_point(color = "darkorchid", size = 2) + 
   labs(
     # Set up x y axes for scatterplot
     x = "Temperature (C°)", 
-       y = "Giant Kelp Frond Elongation Rate(cm day-1)", 
-       title = "Relationship between temperature and growth rate") + 
-theme_replace()
+       y = "Giant Kelp Frond Elongation Rate(cm/day)", 
+       title = "Relationship between temperature and kelp elongation rate") + 
+theme_minimal()
 ```
 
 1c. 
