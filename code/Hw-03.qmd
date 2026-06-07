@@ -130,9 +130,6 @@ personal_data <- read_csv("homework 3 personal data project - Sheet1.csv")
 personal_data$Date
 ```
 
-```{r}
-readr::read_csv(here::here("..", "data", "homework 3 personal data project - Sheet1.csv"))
-```
 
 Hydration + Sleep: 
 ```{r}
@@ -203,7 +200,7 @@ I think an affective visualization that could be useful for my project would be 
 #| echo: false
 #| message: false
 # Using knitr function to embed image into quarto
-knitr::include_graphics("Sketch.jpg")
+knitr::include_graphics(here::here("..", "figures","Sketch.jpg"))
 ```
 3c. 
 
@@ -211,7 +208,7 @@ knitr::include_graphics("Sketch.jpg")
 #| echo: false
 #| message: false
 # use knitr function to embed image into quarto
-knitr::include_graphics("Datavis.jpg")
+knitr::include_graphics(here::here("..", "figures","Datavis.jpg"))
 ```
 
 3d. 
@@ -238,7 +235,10 @@ In this paper, the authors wanted to see how hydration habits before sleeping af
 #| message: false
 
 # Using Knitr function to embed photo directly into Quarto
-knitr::include_graphics("Anovafigure2.jpeg")
+knitr::include_graphics(
+  # Display file path
+  here::here("..", "figures", "Anovafigure2.jpeg")
+)
 ```
 
 4b. 
