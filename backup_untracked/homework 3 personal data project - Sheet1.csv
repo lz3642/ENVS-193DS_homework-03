@@ -1,0 +1,7 @@
+Date,Sleep_hrs,Bedtime_hrsmin,Wakeuptime_hrs_min,hydration,meal,steps,workout,workday,temp_f
+5/26,8.42,3,11.25,24,2,6896,No,No,65
+5/27,7.07,2.3,9.34,24,2,15211,No,Yes,61
+5/28,5.75,2.45,8.3,48,2,17231,No,Yes,62
+5/29,7.28,1.3,8.47,24,2,21204,Yes,Yes,67
+5/30,6.3,3.55,10.13,12,3,14747,No,No,70
+5/31,7.5,3.3,10.3,12,2,8715,Yes,No,68
