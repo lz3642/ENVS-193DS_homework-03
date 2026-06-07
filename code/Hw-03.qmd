@@ -64,44 +64,32 @@ theme_minimal()
 
 1c. 
 
-Assumption Checks:
+Assumption check:
 ```{r}
-#| label: checking
-
-# linear regression model
-kelp_checking <- lm(kelp_elong ~ temp_c, data = kelp)
-# Set up diagnostic plots to appear all in one image
-par(mfrow = c(2, 2))
-# Show diagnostic plots
-plot(kelp_checking)
+#| label: assumptions
+# Pasting data from scatterplot
+ggplot(kelp, aes(x = temp_c, y = kelp_elong)) +
+  geom_point(color = "darkorchid", size = 2) +
+  theme_minimal()
 ```
 
 
-Linear Regression Test:
+Pearson correlation:
 ```{r}
-#| label: linear
-
-# Displaying summary of linear regression model
-summary(kelp_checking)
+#| label: pearson
+# Using pearson correlation
+cor.test(
+  kelp$temp_c,
+  kelp$kelp_elong,
+  method = "pearson"
+)
 ```
 
-The assumptions I checked for were linearity, normal distribution, homeoscadacity, and influential points. I checked using diagnostic plots from the linear regression graphs. From the diagnostic plots, the assumptions seem generally satisfied, as the residuals are not following any sort of extreme pattern, the qqline shows a relative normal distribution, and the Cook's distance values were low in the RVL plots. 
-
-Correlation Test:
-```{r}
-#| label: corr
-
-# Pearson correlation test for parametric values
-cor.test(kelp$temp_c, kelp$kelp_elong)
-```
-
-A Pearson's correlation test showed a strong negative relationship between temperature and growth rate of kelp fronds (r = -0.6877, p-value = 1.366e-05), suggesting that as ocean temperature increases, elongation rate decreases. 
+From my data, I was able to examine information from my scatterplot, and used it for checking my assumptions for using a Pearson correlation test. I assessed if the relationship between temperature and growth rate appeared linear and if there were any glaring outliers, to which it did not and the data appeared linear, having a generally negative trend. Therefore, a Pearson's test was most appropriate to use. 
 
 1d. 
 
-To evaluate the relationship between temperature and kelp growth rate, I used the summary function to construct linear regression model and the Pearson correlation for my correlation test. Pearson correlation measures the direction and strength of the relationship between temperature and elongation, while linear regression analyzed the predictability of temperature on growth rate.
-
-From my test results, it appears that there is a negative association between temperature and kelp elongation rate, suggesting that kelp grows slower under hotter ocean temperatures (Pearson correlation: r = -0.6877, p-value = 1.366e-05, linear regression: beta = -0.432, r-squared = 0.473, p = 1.366e-05)
+A Pearson's correlation test found a significant negative relationship between ocean temperature (C°) and giant kelp frond elongation rate (r = -0.688, p < 0.001), indicating that as ocean temperature increases the growth rate tends to decrease. A p-value less than 0.001 suggests statistical significance, and the correlation coefficient provided suggests a moderate to strong negative association. 
 
 1e. 
 
@@ -116,11 +104,20 @@ These concerns raised from these statistical findings should not be taken lightl
 ```{r}
 #| label: repeating
 
-# Run correlation test to assess linearity
-cor.test(kelp$temp_c, kelp$kelp_elong)
-# Run summary of coefficients, f statistics, coeff of determination
-summary(kelp_checking)
+# pearson test
+cor.test(kelp$temp_c, kelp$kelp_elong, method = "pearson")
+
+# Spearmann test
+cor.test(
+  kelp$temp_c,
+  kelp$kelp_elong,
+  method = "spearman",
+# Suppress warnings of duplicate values in data set
+  exact = FALSE
+)
 ```
+
+The Spearmann rank correlation test found a significant negative relationship (ρ = -0.689, p-value < 0.001), similar to the results of the Pearson correlation test (r = -0.688, p < 0.001). Since both tests had nearly identical correlation coefficients and small p-values, it would still have lead to the same decision of rejecting the null hypothesis of no relationship between the variables. These results provide supporting evidence of the trend that higher ocean temperatures are associated with lower kelp growth rates. 
 
 # Problem 2
 
@@ -131,6 +128,10 @@ summary(kelp_checking)
 personal_data <- read_csv("homework 3 personal data project - Sheet1.csv")
 # Converting into date format in Rstudio
 personal_data$Date
+```
+
+```{r}
+readr::read_csv(here::here("..", "data", "homework 3 personal data project - Sheet1.csv"))
 ```
 
 Hydration + Sleep: 
@@ -219,7 +220,9 @@ My data visualization was drawn by hand on paper and it is showing health charac
 
 3e. 
 
-Link to slides: https://docs.google.com/presentation/d/1_hC-_YOgUdngVi8XIew6GvAZk7fb11zLQptmSBFhvrU/edit?usp=sharing
+Link to slides: 
+
+[Google Slides Presentation](https://docs.google.com/presentation/d/1_hC-_YogUdngVi8XIew6GvAZk7fb11zLQptmSBFhvrU/edit?usp=sharing)
 
 # Problem 4
 
