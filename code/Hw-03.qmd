@@ -28,9 +28,19 @@ library(readxl)
 library(scales)
 ```
 
+
 Loading kelp package:
+
+```{r}
+#| label: loading
+#| message: false
+kelp <- read_csv(here::here("..", "data", "temp-kelp (1).csv"))
+```
+
 ```{r}
 #| label: kelp package
+#| message: false
+#| include: false
 kelp <- read_csv(here::here("..", "data", "temp-kelp (1).csv"))
 # Display first 6 rows
 head(kelp)
