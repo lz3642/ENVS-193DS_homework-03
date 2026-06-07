@@ -7,7 +7,7 @@ The files are:
 
 - README.md - Description 
 
-- ENVS-193DS_homework-03.qmd - The quarto document containing my homework.
+- Hw 3.qmd - The quarto document containing my homework.
 
 - data - Data for homework 3
 
